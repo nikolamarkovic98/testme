@@ -1,0 +1,42 @@
+.auth-wrapper{
+    display: flex;
+    justify-content: center;
+    margin: 60px 0;
+}
+.sign-up{
+    min-height: 400px;
+}
+.sign-in{
+    min-height: 270px;
+}
+.auth{
+    width: 50%;
+    text-align: center;
+    border-radius: 12px;
+}
+.auth .form-box{
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+    width: 46%;
+    margin: 0 auto;
+}
+.auth .or{
+    margin-top: 10px;
+}
+.auth .or a{
+    font-weight: bold;
+    color: #A08258;
+    cursor: pointer;
+}
+.auth .or span:hover{
+    text-decoration: underline;
+}
+.auth .form-box:last-child{
+    display: block;
+    text-align: center;
+}
+input{
+    border: 1px solid #492827;
+}

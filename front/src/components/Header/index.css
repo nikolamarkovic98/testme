@@ -1,0 +1,81 @@
+header{
+    /*padding: 8px 0;*/
+    background-color: #492827;
+    color: #F0E3C5;
+    box-shadow: 0px 2px 20px #f0e3c5;
+}
+header .content-wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+a{
+    color: #F0E3C5;;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+header input{
+    width: 300px;
+    padding: 8px;
+    background-color: inherit;
+    color: #F0E3C5;
+    border: 1px solid #604F47;
+    border-radius: 12px;
+    outline: none;
+}
+header input::placeholder{
+    color: #F0E3C5;
+}
+header .auth-link{ margin-left: 20px; }
+header ul{
+    position: relative;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+header li{
+    display: inline-block;
+    padding: 10px 0;
+    cursor: pointer;
+}
+/*header li a:hover{
+    text-decoration: underline;
+}*/
+header li ul{
+    display: none;
+    position: absolute;
+    top: 39px;
+    left: 0;
+    width: 140px;
+    background-color: #fff; 
+}
+header li ul li{
+    display: block;
+    padding: 0;
+    text-align: center;
+    border-bottom: 1px solid #492827;
+    color: #000;
+    font-size: 14px;
+}
+header li ul li:first-child{
+    margin-top: 0;    
+}
+header li ul li:last-child{
+    margin-bottom: 0;
+    border: none;  
+}
+header li ul li a{
+    display: block;
+    padding: 6px 0;
+    color: #000;
+}
+header li ul li:hover a{
+    background-color: #492827;
+    color: #fff;
+    text-decoration: none;
+}
+header li:hover ul{
+    display: block;
+}

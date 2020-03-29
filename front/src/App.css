@@ -1,0 +1,56 @@
+a{
+    color: #000;
+    text-decoration: none;
+}
+h1{
+    font-size: 48px;
+}
+ul, li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+input,
+textarea{
+    padding: 8px;
+    background-color: inherit;
+    color: #000;
+    border: 1px solid #492827;
+    border-radius: 12px;
+    outline: none;
+    resize: none;
+}
+.logo{
+    margin: 0;
+}
+.logo a{
+    font-size: 24px;
+}
+.logo a:hover{ text-decoration: none; }
+.content-wrap{
+    width: 64%;
+    margin: 0 auto;
+}
+.classic-btn{
+    padding: 12px 36px;
+    border: none;
+    border-radius: 12px;
+    background-color: #A08258;
+    color: #fff;
+    outline: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.1s;
+}
+.classic-btn:hover{
+    background-color: #856840;
+    text-decoration: none;
+}
+.span-color{
+    font-size: inherit;
+    color: #A08258;
+}
+#msg{
+    color: red;
+    height: 20px;
+}
