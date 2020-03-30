@@ -1,0 +1,144 @@
+.create-test{
+    width: 100%;
+    margin: 100px 0;
+}
+.create-test h1{
+    margin-bottom: 0;
+}
+.create-test .info{
+    margin-bottom: 40px;
+}
+.wrapper{
+    padding: 10px;
+}
+.panel h1, h2, p{
+    margin: 0;
+}
+.panel{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #492827;
+}
+/*.panel .panel-box:first-child{
+    border-right: 1px solid #492827;
+}*/
+.panel .panel-box:last-child{
+    border-left: 1px solid #492827;
+    overflow: auto;
+}
+.panel .panel-box{
+    width: 50%;
+    max-height: 700px;
+}
+.panel .panel-box nav{
+    display: flex;
+    text-align: center;
+}
+.panel .panel-box nav div{
+    width: 50%;
+    padding: 14px 0;
+    border-bottom: 1px solid #a08258;
+    cursor: pointer;
+}
+.panel .panel-box nav div:last-child{
+    border-right: none;
+}
+.panel .panel-box nav div.active{
+    background-color: #a08258;
+    color: #fff;
+}
+.panel .panel-box .resources .resource{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #492827;
+    padding: 2px;
+}
+.panel .panel-box .resources .resource a{
+    color: #000;
+}
+/*.panel .panel-box .resources .resource button*/
+.remove-btn{
+    font-size: 12px;
+    border: none;
+    background-color: #ff6161;
+    color: #fff;
+    cursor: pointer;
+}
+.panel .panel-box .resources .resource button:hover{
+    background-color: #ff3838;
+}
+.panel .panel-box .resources .resource a:hover{
+    text-decoration: none;
+    color: blue;
+}
+.panel .panel-box .resources .added-resources{
+    padding: 6px;
+    max-height: 124px;
+    overflow: auto;
+}
+.panel .panel-box .resources{
+    position: relative;
+    min-height: 160px;
+    border: 1px solid #492827;
+    border-radius: 12px;
+}
+.panel .panel-box .resources .control{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 33px;
+    border-top: 1px solid #492827;
+}
+.panel .panel-box .resources .control input{
+    display: inline-block;
+    width: 80%;
+    border: none;
+    border-radius: 0;
+    border-bottom-left-radius: 12px;
+    background-color: #b59262;
+    color: #fff;
+}
+.panel .panel-box .resources .control input::placeholder{ color: #fff; }
+.panel .panel-box .resources .control button{
+    width: 20%;
+    padding: 8px 0;
+    border-radius: 0;
+    border-bottom-right-radius: 12px;
+}
+.panel .panel-box .general-panel,
+.panel .panel-box .question-panel{
+    display: none;
+}
+.panel .panel-box .general-panel.active,
+.panel .panel-box .question-panel.active{
+    display: block;
+}
+.create-test .create-test-btn{
+    padding: 12px 30px;
+    background-color: inherit;
+    border: 1px solid #492827;
+    border-radius: 12px;
+    outline: none;
+    cursor: pointer;
+}
+.create-test .create-test-btn:hover{
+    background-color: #492827;
+    color: #fff;
+}
+.create-test .question-box:last-child #question-input-msg{
+    height: 20px;
+    padding-top: 20px 0;
+    color: red;
+}
+.create-test .create-test-options{
+    padding: 10px 0;
+    text-align: right;
+}
+.create-test .create-test-options button{
+    margin-left: 10px;
+}
+.create-test .create-test-options .classic-btn.remove-btn{
+    background-color: #ff6161;
+}

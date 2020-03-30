@@ -1,0 +1,31 @@
+.contact-wrapper{
+    display: flex;
+    justify-content: center;
+    margin: 60px 0;
+}
+.contact{
+    width: 50%;
+    text-align: center;
+}
+.contact h1 span{
+    padding-right: 10px;
+    font-size: 48px;
+    color: #A08258;
+}
+.contact .form-box{
+    padding: 10px;
+}
+.contact .form-box input,
+.contact .form-box textarea{
+    width: 40%;
+}
+.contact .form-box input::placeholder{
+    color: #492827;
+}
+.contact .form-box textarea{
+    height: 200px;
+}
+.contact .form-box:last-child{
+    display: block;
+    text-align: center;
+}

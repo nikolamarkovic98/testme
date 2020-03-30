@@ -1,0 +1,26 @@
+.landing{
+    position: relative;
+    z-index: -2;
+    width: 100%;
+    min-height: 700px;
+    background-color: #492827;
+    color: #f0e3c5;
+}
+.landing .bg{
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    min-height: 700px;
+    background-image: url('./landing-bg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    opacity: 0.7;
+}
+.landing .content{
+    padding-top: 200px;
+    text-align: right;
+}
+.landing h1{
+    margin: 0;
+}
