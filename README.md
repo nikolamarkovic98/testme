@@ -20,8 +20,11 @@ The core features of testMe platform are:
 # 1. SignUp
 In order to create test, first thing you need to do is create an account. Required information is:
 ~ Firstname
+
 ~ Lastname
+
 ~ Email
+
 ~ Username
 ~ Password
 
