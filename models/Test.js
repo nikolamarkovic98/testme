@@ -19,13 +19,18 @@ const testSchema = new Schema({
         }
     ],
     resources: {
-        type: String,
-        required: true
+        type: String
     },
     creator: {
         type: mongoose.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    usersThatPassedTest: [
+        {
+            type: mongoose.Types.ObjectId,
+            required: true
+        }
+    ]
 }, {timestamps:true});
 
 module.exports = mongoose.model('Test', testSchema);

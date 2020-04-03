@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 
 import myContext from '../../context/context';
-import {createStr} from '../../helpers';
+import {createStr, redirectHome, displayMessage} from '../../helpers';
 import {sendAuthHTTP} from '../../requests';
 
 import Question from '../Question';
@@ -22,25 +22,52 @@ const isURL = (string) => {
 // I should also implement functionality that you can like change the order of questions
 class CreateTest extends React.Component {
     state = {
+        testCreated: false,
         questions: [],
         resources: []
     }
 
     static contextType = myContext;
 
-    constructor(props){
-        super(props);
+    createTestValidation = (title, desc) => {
+        if(title === ''){
+            displayMessage('msg', 'Title is required!', 'red');
+            return true;
+        }
+        if(desc === ''){
+            displayMessage('msg', 'Description is required!', 'red');
+            return true;
+        }
+        if(this.state.questions.length === 0){
+            displayMessage('msg', 'Test must have questions!', 'red');
+            return true;
+        }
+
+        return false;
     }
 
     createTest = async e => {
+        if(this.state.testCreated){
+            displayMessage('msg', 'You already created test!', 'green');
+            return;
+        }
+
         const title = (document.querySelector('#title').value).trim();
         const desc = (document.querySelector('#desc').value).trim();
-        // questions and resources must be stringified
+
+        // validation
+        if(this.createTestValidation(title, desc))
+            return;
+
+        displayMessage('msg', '', 'red');
+
+        // questions must be stringified
         const questions = createStr(JSON.stringify(this.state.questions));
+
         // since it's just string in db I dont need to send generated ids...
         let resources = '';
         this.state.resources.forEach((resource, index) => {
-            if(resources.length-1 == index)
+            if(resources.length-1 === index)
                 resources += `${resource.URL}`;
             resources += `${resource.URL} `;
         });
@@ -50,9 +77,15 @@ class CreateTest extends React.Component {
         }
 
         const res = await sendAuthHTTP(query, this.context.token);
-        console.log(res);
-        if(res.data.createTest.msg == 'Test created!')
-            document.querySelector('#msg').innerHTML = res.data.createTest.msg;
+        if(res === undefined || res === null)
+            return;
+        if(res.data.createTest !== undefined){
+            if(res.data.createTest.msg === 'Test created!'){
+                displayMessage('msg', res.data.createTest.msg, 'green');
+                this.setState({testCreated: true});
+                this.context.loadTests();
+            }
+        }
     }
 
     handleSwitch = e => {
@@ -86,17 +119,17 @@ class CreateTest extends React.Component {
         document.querySelector('#resource-add').value = '';
         
         // validation
-        if(URL == ''){
-            document.querySelector('#msg').innerHTML = 'Resource can\'t be empty';
+        if(URL === ''){
+            displayMessage('resource-msg', 'Resource can\'t be empty', 'red');
             return;
         }
 
         if(!isURL(URL)){
-            document.querySelector('#msg').innerHTML = 'Not valid URL!';
+            displayMessage('resource-msg', 'Not valid URL!', 'red');
             return;
         }
 
-        document.querySelector('#msg').innerHTML = '';
+        displayMessage('resource-msg', '', 'red');
 
         let resources = this.state.resources;
         resources.push({
@@ -108,7 +141,7 @@ class CreateTest extends React.Component {
     removeResource = id => {
         let resources = this.state.resources;
         resources.forEach((resource, index) => {
-            if(resource.id == id)
+            if(resource.id === id)
                 resources.splice(index, 1);
         });
         this.setState({resources: resources});
@@ -124,12 +157,12 @@ class CreateTest extends React.Component {
         const D = document.querySelector('#D').value;
 
         // validate question input
-        /*if(question == '' || answer == '' || A == '' || B == '' || C == '' || D == ''){
-            document.querySelector('#question-input-msg').innerHTML = 'All inputs are required!';
+        if(question === '' || answer === '' || A === '' || B === '' || C === '' || D === ''){
+            displayMessage('question-input-msg', 'All inputs are required!', 'red');
             return;
-        }*/
+        }
 
-        document.querySelector('#question-input-msg').innerHTML = '';
+        displayMessage('question-input-msg', '', 'red');
 
         let questions = this.state.questions;
         questions.push({
@@ -146,7 +179,7 @@ class CreateTest extends React.Component {
     editQuestion = question => {
         const questions = this.state.questions;
         for(let i = 0; i < questions.length; i++)
-            if(questions[i].id == question.id)
+            if(questions[i].id === question.id)
                 questions[i] = question;
         this.setState({questions:questions});
     }
@@ -154,7 +187,7 @@ class CreateTest extends React.Component {
     removeQuestion = id => {
         let questions = this.state.questions;
         for(let i = 0; i < questions.length; i++){
-            if(questions[i].id == id){
+            if(questions[i].id === id){
                 questions.splice(i, 1);
             }
         }
@@ -162,7 +195,7 @@ class CreateTest extends React.Component {
     }
 
     moveQuestionUp = index => {
-        if(index == 0 || this.state.questions.length == 0)
+        if(index === 0 || this.state.questions.length === 0)
             return;
         let questions = this.state.questions;
         let x = this.state.questions[index];
@@ -172,7 +205,7 @@ class CreateTest extends React.Component {
     }
     
     moveQuestionDown = index => {
-        if(index == this.state.questions.length-1 || this.state.questions.length == 0)
+        if(index === this.state.questions.length-1 || this.state.questions.length === 0)
             return;
         let questions = this.state.questions;
         let x = this.state.questions[index];
@@ -183,7 +216,7 @@ class CreateTest extends React.Component {
 
     render(){
         let questions;
-        if(this.state.questions.length != 0){
+        if(this.state.questions.length !== 0){
             questions = this.state.questions.map((question, index) => {
                 return (
                     <Question key={question.id} id={question.id} index={index} question={question.question}
@@ -219,15 +252,15 @@ class CreateTest extends React.Component {
                             <div className="general-panel wrapper active">
                                 <h2>General</h2>
                                 <p>Here you can set some of general information about the test you are about to create such as title and description.</p>
-                                <div className="question-box">
+                                <div className="general-panel-box">
                                     <label>Title:</label>
                                     <input type="text" className="question-input color" id="title" maxLength="40" />
                                 </div>
-                                <div className="question-box">
+                                <div className="general-panel-box">
                                     <label>Description:</label>
                                     <textarea className="question-input color" id="desc" maxLength="500"></textarea>
                                 </div>
-                                <div className="question-box">
+                                <div className="general-panel-box resources-wrapper">
                                     <p>If you know any useful literature that could help users pass the test, you can add it here:</p>
                                     <div className="resources">
                                         <div className="added-resources">
@@ -238,8 +271,8 @@ class CreateTest extends React.Component {
                                             <button className="classic-btn" onClick={this.addResource}>Add</button>
                                         </div>
                                     </div>
+                                    <p id="resource-msg" className="msg"></p>
                                 </div>
-                                <p id="msg"></p>
                             </div>
                             <div className="question-panel wrapper">
                                 <h2>Add Question</h2>
@@ -280,7 +313,7 @@ class CreateTest extends React.Component {
                                 <div className="question-box align">
                                     <button className="classic-btn" onClick={this.addQuestion}>Add Question</button>
                                     <div>
-                                        <p id="question-input-msg"></p>
+                                        <p id="question-input-msg" className="msg"></p>
                                     </div>
                                 </div>
                             </div>
@@ -291,10 +324,10 @@ class CreateTest extends React.Component {
                         </div>
                     </div>
                     <div className="create-test-options">
-                        <button className="classic-btn remove-btn">Cancel</button>
+                        <button className="cancel-btn" onClick={e => redirectHome(e, this.context.history, this.state.testCreated)}>Cancel</button>
                         <button className="classic-btn" onClick={this.createTest}>Create Test</button>
                     </div>
-                    <p id="msg"></p>
+                    <p id="msg" className="msg"></p>
                 </div>
             </div>
         )

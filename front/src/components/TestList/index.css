@@ -1,0 +1,29 @@
+.test-list h1{
+    text-align: center;
+}
+.list{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 20px;
+}
+.list .classic-btn{
+    width: 500px;
+    margin-bottom: 20px;
+    padding: 20px 0;
+    text-align: center;
+    border: 1px solid #492827;
+    border-radius: 24px;
+    background-color: inherit;
+    color: #492827;
+}
+.list .classic-btn:hover{
+    background-color: #492827;
+    color: #fff;
+}
+
+@media(max-width: 720px){
+    .list .classic-btn{
+        width: 90%;
+    }
+}

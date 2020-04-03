@@ -20,6 +20,10 @@ textarea{
     outline: none;
     resize: none;
 }
+.user-image{
+    width: 40px;
+    height: auto;
+}
 .logo{
     margin: 0;
 }
@@ -31,6 +35,7 @@ textarea{
     width: 64%;
     margin: 0 auto;
 }
+
 .classic-btn{
     padding: 12px 36px;
     border: none;
@@ -46,11 +51,60 @@ textarea{
     background-color: #856840;
     text-decoration: none;
 }
+.cancel-btn{
+    display: inline-block;
+    padding: 12px 36px;
+    color: #ff6161;
+    border-radius: 12px;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.1s;
+}
+.cancel-btn:hover{
+    box-shadow: 2px 2px 8px #ff3838;
+    text-decoration: none;
+}
+
 .span-color{
     font-size: inherit;
     color: #A08258;
 }
-#msg{
-    color: red;
+.msg{
     height: 20px;
+    font-weight: bold;
+}
+
+.dialog-wrapper{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1040;
+    background-color: rgb(50, 50, 50, 0.8);
+}
+.dialog-second-wrapper{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1050;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.dialog-flex{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 100px auto;
+}
+
+@media(max-width: 860px){
+    .content-wrap{
+        width: 80%;
+    }
 }

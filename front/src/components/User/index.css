@@ -1,0 +1,47 @@
+.user{
+    min-height: 600px;
+    margin: 60px 0;
+}
+.user .tests{
+    width: 100%;
+}
+.user .tests nav{
+    text-align: center;
+}
+.user .tests nav div{
+    display: inline-block;
+    padding: 20px 0;
+    width: 50%;
+    background-color: #fff6e0;
+    border: 1px solid #492827;
+    cursor: pointer;
+}
+.user .tests nav div:hover{
+    background-color: #604f47;
+    color: #fff;
+}
+.user nav div.active{
+    background-color: #492827;
+    color: #fff;
+}
+.user nav div.active:hover{
+    background-color: #492827;
+}
+.list{
+    background-color: #fff6e0;
+    box-shadow: 2px 2px 8px #333;
+}
+.user #user-test-list,
+.user #user-passed-tests{
+    display: none;
+}
+.user #user-test-list.active,
+.user #user-passed-tests.active{
+    display: block;
+}
+
+@media(max-width: 420px){
+    .user h1{
+        font-size: 36px;
+    }
+}

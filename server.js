@@ -5,7 +5,7 @@ const expressGraphql = require('express-graphql');
 const schema = require('./graphql/schema');
 const resolvers = require('./graphql/resolvers');
 
-const auth = require('./middleware/Auth');
+const auth = require('./middleware/auth');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -27,11 +27,10 @@ app.use(auth);
 
 app.use('/graphql', expressGraphql({
     schema: schema,
-    rootValue: resolvers,
-    graphiql: true
+    rootValue: resolvers
 }));
 
-mongoose.connect(`mongodb+srv://${process.env.mongo_username}:${process.env.mongo_password}@mydb-x0kvb.mongodb.net/${process.env.mongo_database}?retryWrites=true&w=majority`,
+mongoose.connect(`mongodb+srv://nikolahot:pasteta@mydb-x0kvb.mongodb.net/question-app?retryWrites=true&w=majority`,
 {
     useUnifiedTopology: true,
     useNewUrlParser: true

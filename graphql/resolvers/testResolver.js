@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Test = require('../../models/Test');
 const User = require('../../models/User');
 
-const {getUser, parseStr, calculateScoreAndGrade} = require('./helpers');
+const {getUser, removePassedTests, parseStr, calculateScoreAndGrade} = require('./helpers');
 
 module.exports = {
     tests: async () => {
@@ -93,6 +93,37 @@ module.exports = {
             console.log(err);
         }
     },
+    removeTest: async ({_id}, req) => {
+        if(!req.logged){
+            return 'Unauthorized'
+        }
+        try{
+            // deleting test
+            const deletedTest = await Test.findByIdAndDelete(_id);
+
+            // here I delete passedTest from every user that passed it
+            await removePassedTests(deletedTest.usersThatPassedTest, _id);
+
+            // here I delete it from createTest list of creator
+            const user = await User.findById(deletedTest.creator);
+            let success = false;
+            for(let i = 0; i < user.createdTests.length; i++){
+                if(user.createdTests[i] == _id){
+                    success = true;
+                    user.createdTests.splice(i, 1);
+                    break;
+                }
+            }
+
+            await user.save();
+            if(deletedTest && success)
+                return 'Removed';
+            else
+                return 'Test does not exist';
+        } catch (err){
+            console.log(err);   
+        }
+    },
     rateTest: async (args, req) => {
         if(!req.logged){
             console.log('You must be logged in!');
@@ -100,21 +131,37 @@ module.exports = {
                 msg: 'Unauthenticated'
             };
         }
+
         // all I need to save is test id and score...
-        // passedTest is user's test and I need test from db for correct answers
-        const passedTest = JSON.parse(parseStr(args.test));
-        const dbTest = await Test.findById(passedTest._id);
+        // passedTest is the test that user just completed and I need test from db for correct answers
+        let passedTest = JSON.parse(parseStr(args.test));
+        let user = await User.findById(req.userId);
+        
+        let match = false;
+        //for(let i = 0; i < user.passedTests.length && !alreadyCompleted; i++){
+            for(let i = 0; i < user.passedTests.length && !match; i++){
+                if(user.passedTests[i]._id == passedTest._id){
+                    user.passedTests.splice(i, 1);
+                    match = true;
+                }
+            }
+            
+        let dbTest = await Test.findById(passedTest._id);
+        dbTest.usersThatPassedTest.push(req.userId);
+        
         const score = calculateScoreAndGrade(passedTest.questions, dbTest.questions);
-        const user = await User.findById(req.userId);
-        user.passedTests.push({
+        
+        const newTest = {
             _id: dbTest.id,
             score: score[0],
-            grade: score[1],
+            grade : score[1],
             minutes: args.minutes,
             seconds: args.seconds
-        });
+        };
+        user.passedTests.unshift(newTest);
+        await dbTest.save();
         await user.save();
-
+        
         // rate test... and save to db
         return 'Success';
     }

@@ -3,38 +3,44 @@ import '../index.css';
 
 import {Link} from 'react-router-dom';
 import { sendHTTP } from '../../../requests';
+import {displayMessage} from '../../../helpers';
 
 const handleSubmit = async e => {
     e.preventDefault();
-    const firstName = document.querySelector('#first-name').value;
-    const lastName = document.querySelector('#last-name').value;
-    const username = document.querySelector('#username').value;
-    const password = document.querySelector('#password').value;
-    const passwordConfirm = document.querySelector('#password-confirm').value;
+    const firstName = (document.querySelector('#first-name').value).trim();
+    const lastName = (document.querySelector('#last-name').value).trim();
+    const email = (document.querySelector('#email').value).trim();
+    const username = (document.querySelector('#username').value).trim();
+    const password = (document.querySelector('#password').value).trim();
+    const passwordConfirm = (document.querySelector('#password-confirm').value).trim();
 
     // validation
-    if(!(firstName != '' && lastName != '' && username != '' &&
-       password != '' && passwordConfirm != '')){
-        document.querySelector('#msg').innerHTML = 'All fields are required!';
+    if(!(firstName !== '' && lastName !== '' && username !== '' &&
+       password !== '' && passwordConfirm !== '' && email !== '')){
+        displayMessage('msg', 'All fields are required!', 'red');
         return;
     }
-    if(password != passwordConfirm){
-        document.querySelector('#msg').innerHTML = 'Passwords need to match!';
+    if(password !== passwordConfirm){
+        displayMessage('msg', 'Passwords need to match!', 'red');
         return;
     }
 
     // everything ok make request
     document.querySelector('#msg').innerHTML = '';
     const query = {
-        query: `mutation{createUser(userInput:{firstName:"${firstName}",lastName:"${lastName}",username:"${username}",password:"${password}"}){msg}}`
+        query: `mutation{createUser(userInput:{firstName:"${firstName}",lastName:"${lastName}", email:"${email}", username:"${username}",password:"${password}"}){msg}}`
     }
 
     const res = await sendHTTP(query);
-    if(res.data.createUser.msg == 'Username already taken'){
-        document.querySelector('#msg').innerHTML = `${res.data.createUser.msg}!`;
-        return;
+    if(res === undefined || res === null)
+            return;
+    if(res.data.createUser !== undefined){
+        if(res.data.createUser.msg === 'Username already taken' || res.data.createUser.msg === 'Email already taken'){
+            displayMessage('msg', res.data.createUser.msg, 'red');
+            return;
+        }
+        displayMessage('msg', res.data.createUser.msg, 'green');
     }
-    document.querySelector('#msg').innerHTML = `${res.data.createUser.msg}!`;
 }
 
 const SignUp = props => {
@@ -52,23 +58,27 @@ const SignUp = props => {
                         <input type="text" id="last-name" />
                     </div>
                     <div className="form-box">
+                        <label>Email:</label>
+                        <input type="email" id="email" />
+                    </div>
+                    <div className="form-box">
                         <label>Username:</label>
                         <input type="text" id="username" />
                     </div>
                     <div className="form-box">
                         <label>Password:</label>
-                        <input type="text" id="password" />
+                        <input type="password" id="password" />
                     </div>
                     <div className="form-box">
                         <label>Confirm password:</label>
-                        <input type="text" id="password-confirm" />
+                        <input type="password" id="password-confirm" />
                     </div>
                     <div className="form-box">
                         <button type="submit" className="classic-btn" onClick={handleSubmit}>SignUp</button>
                         <p className="or">Already have an account? <Link to="/signin">SignIn</Link></p>
                     </div>
                 </form>
-                <p id="msg"></p>
+                <p id="msg" className="msg"></p>
             </div>
         </div>
     )

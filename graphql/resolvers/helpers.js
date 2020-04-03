@@ -56,6 +56,34 @@ const getPassedTests = _passedTests => {
     });
 }
 
+const removePassedTests = async (usersThatPassedTest, testId) => {
+    let err = '';
+    // looping through usersThatPassedTest array with userIds > fetching user with userId > looping through passedTests 
+    // > removing the passedTest because the test doesnt exist anymore
+    return new Promise((resolve, reject) => {
+        usersThatPassedTest.forEach(async (userId, index, arr) => {
+            try{
+                const _user = await User.findById(userId);
+                for(let i = 0; i < _user.passedTests.length; i++){
+                    if(_user.passedTests[i]._id == testId){
+                        _user.passedTests.splice(i, 1);
+                        await _user.save();
+                        break;
+                    }
+                }
+            } catch(err){
+                err = 'Desila se neka greska'
+            }
+            if(index == arr.length-1){
+                if(err == '')
+                    resolve('Success')
+                else
+                    reject(err);
+            }
+        });
+    });
+}
+
 const parseStr = str => {
     let newStr = '';
     for(let i = 0; i < str.length; i++){
@@ -109,7 +137,7 @@ const calculateScoreAndGrade = (passedQuestions, dbQuestions) => {
         });
     });
 
-    score = (score / dbQuestions.length) * 100;
+    score = Number((score / dbQuestions.length) * 100);
     grade = calculateGrade(score);
 
     // percentage and grade
@@ -120,6 +148,7 @@ module.exports = {
     getUser,
     getTests,
     getPassedTests,
+    removePassedTests,
     parseStr,
     calculateScoreAndGrade
 }

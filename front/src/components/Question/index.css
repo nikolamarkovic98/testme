@@ -1,0 +1,84 @@
+.question{
+    position: relative;
+    padding: 10px 0;
+    margin: 10px 0;
+    border: 1px solid #492827;
+    border-radius: 12px;
+}
+.question .question-box.added{
+    text-align: left;
+}
+.question.hide .content{
+    display: none;
+}
+.question .question-box.added{
+    padding: 14px 40px 10px 14px;
+}
+.question .question-box.added .question-input{
+    border: 1px solid #F0E3C5;
+    cursor: default;
+}
+.question .question-box .question-input.color{
+    cursor: auto;
+} 
+.question .question-box .question-input.color{
+    border: 1px solid #492827;
+}
+.question .question-box .question-input.color:hover,
+.question .question-box .question-input.color:focus{
+    background-color: rgb(240, 240, 240);
+}
+.question-box.added .answer-box{
+    text-align: left;
+}
+.question-box.added{
+    border: none;
+    text-align: center;
+}
+.question-box:last-child{
+    padding: 0 10px;
+}
+
+/* ABSOLUTE ITEMS */
+.question .index{
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    font-size: 13px;
+    font-weight: bold;
+}
+.question .del-btn{
+    position: absolute;
+    padding: 0 6px;
+    top: 6px;
+    right: 6px;
+    font-size: 20px;
+    background-color: inherit;;
+    border: 1px solid red;
+    border-radius: 50%;
+    color: red;
+    cursor: pointer;
+}
+.question .del-btn:hover{
+    background-color: red;
+    color: #fff;
+}
+.arrows{
+    position: absolute;
+    right: 8px;
+    width: 21px;
+    height: 21px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-size: 30px;
+    cursor: pointer;
+}
+.arrow-up{
+    top: 36px;
+    background-image: url('./up-arrow.png');
+}
+.arrow-down{
+    top: 60px;
+    background-image: url('./down-arrow.png');
+}

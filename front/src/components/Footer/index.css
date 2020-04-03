@@ -13,10 +13,13 @@ footer .one{
 }
 footer .one .content-wrap{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 footer .one .footer-box{
     width: 30%;
+}
+footer .one .footer-box:last-child{
+    text-align: right;
 }
 footer .one .footer-box:first-child p{
     margin-bottom: 26px;
@@ -30,6 +33,7 @@ footer .one h2{
     font-weight: lighter;
 }
 footer .one ul{
+    padding-top: 20px;
     margin-left: 4px;
 }
 footer .one .footer-box li{
@@ -53,4 +57,56 @@ footer .two{
 footer .two .logo{
     display: inline-block;
     margin-right: 20px;
+}
+
+@media(max-width: 960px){
+    footer .bg{
+        width: 160px;
+        height: 160px;
+    }
+}
+@media(max-width: 760px){
+    footer .one ul{
+        padding-top: 40px;
+    }
+}
+@media(max-width: 620px){
+    footer .bg{
+        width: 100px;
+        height: 100px;
+    }
+    footer .one ul{
+        padding-top: 24px;
+    }
+    footer .one .footer-box{
+        width: 50%;
+    }
+    footer .two{
+        padding: 20px 60px;
+    }
+}
+@media(max-width: 480px){
+    footer .one .content-wrap{ display: block; }
+    footer .one .footer-box{
+        width: 100%;
+        text-align: center;
+    }
+    footer .one .footer-box h2{ margin-bottom: 20px; }
+    footer .one .footer-box ul{ padding: 0; }
+    footer .one .footer-box:last-child{
+        margin-top: 100px;
+        text-align: center;
+    }
+    footer .two{
+        padding: 20px;
+    }
+    footer .bg{
+        width: 40px;
+        height: 40px;
+    }
+}
+@media(max-width: 340px){
+    footer .bg{
+        display: none;
+    }
 }

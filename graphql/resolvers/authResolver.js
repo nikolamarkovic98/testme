@@ -37,17 +37,24 @@ module.exports = {
     createUser: async args => {
         try{
             // I will implement email later
-            const user = await User.findOne({username: args.userInput.username});
-            if(user){
-                console.log('User exists');
+            const userUsername = await User.findOne({username: args.userInput.username});
+            const userEmail = await User.findOne({email: args.userInput.email});
+            if(userUsername){
                 return {
                     msg: 'Username already taken'
                 };
             }
+            if(userEmail){
+                return {
+                    msg: 'Email already taken'
+                };
+            }
+
             const hashedPassword = await bcrypt.hash(args.userInput.password, 12);
             const newUser = new User({
                 firstName: args.userInput.firstName, 
-                lastName: args.userInput.lastName, 
+                lastName: args.userInput.lastName,
+                email: args.userInput.email,
                 username: args.userInput.username,
                 password: hashedPassword,
                 createdTests: [],
@@ -69,7 +76,7 @@ module.exports = {
             const _user = await User.findOne({username:username});
             if(!_user){
                 return{
-                    msg: 'User does not exist!'
+                    msg: 'User does not exist'
                 }
             }
             

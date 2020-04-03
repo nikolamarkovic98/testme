@@ -10,7 +10,7 @@
     min-height: 270px;
 }
 .auth{
-    width: 50%;
+    width: 60%;
     text-align: center;
     border-radius: 12px;
 }
@@ -19,8 +19,12 @@
     padding: 10px;
     justify-content: space-between;
     align-items: center;
-    width: 46%;
+    width: 50%;
     margin: 0 auto;
+}
+.auth .form-box input{
+    width: 50%;
+    border: 1px solid #492827;
 }
 .auth .or{
     margin-top: 10px;
@@ -37,6 +41,37 @@
     display: block;
     text-align: center;
 }
-input{
-    border: 1px solid #492827;
+.auth .msg{
+    text-align: center;
+}
+
+@media(max-width: 1200px){
+    .auth{
+        width: 80%;
+    }
+}
+@media(max-width: 900px){
+    .auth{
+        width: 100%;
+    }
+}
+@media(max-width: 700px){
+    .auth .form-box{
+        width: 60%;
+    }
+}
+@media(max-width: 600px){
+    .auth .form-box{
+        width: 70%;
+    }
+}
+@media(max-width: 500px){
+    .auth .form-box{
+        width: 80%;
+    }
+}
+@media(max-width: 400px){
+    .auth .form-box{
+        width: 100%;
+    }
 }

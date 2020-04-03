@@ -18,7 +18,6 @@ const Footer = props => {
                     <div className="footer-box">
                         <h2>Links</h2>
                         <ul>
-                            <li><Link to="/about"><span className="span-color">&#8594;</span> About</Link></li>
                             <li><Link to="/contact"><span className="span-color">&#8594;</span> Contact</Link></li>
                             <li><a href="https://github.com/nikolamarkovic98" target="_blank"><span className="span-color">&#8594;</span> Creator GitHub</a></li>
                             <li><a href="http://portfolio-nikola.herokuapp.com/" target="_blank"><span className="span-color">&#8594;</span> Creator Portfolio</a></li>

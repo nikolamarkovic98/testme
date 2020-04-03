@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
 import {sendHTTP} from '../../requests';
+import {displayMessage} from '../../helpers';
 
 const sendEmail = async e => {
     e.preventDefault();
@@ -9,19 +10,26 @@ const sendEmail = async e => {
     const subject = (document.querySelector('#subject').value).trim();
     const text = (document.querySelector('#text').value).trim();
 
-    // validation
+    if(from === '' || subject === '' || text === ''){
+        displayMessage('msg', 'All inputs are required!', 'red');
+        return;
+    }
 
-    document.querySelector('#msg').innerHTML = 'Sending email...';
+    displayMessage('msg', 'Sending email...', '#000');
 
     const query = {
         query: `query{sendEmail(from:"${from}",subject:"${subject}",text:"${text}")}`
     }
 
     const res = await sendHTTP(query);
-    if(res.data.sendEmail == 'Success'){
-        document.querySelector('#msg').innerHTML = res.data.sendEmail;
-    } else {
-        console.log('Error while sending email');
+    if(res === undefined || res === null)
+            return;
+    if(res.data.sendEmail !== undefined){
+        if(res.data.sendEmail === 'Success'){
+            displayMessage('msg', res.data.sendEmail, 'green');
+        } else {
+            displayMessage('msg', 'An error occurred while sending email', 'red');
+        }
     }
 }
 
@@ -42,7 +50,7 @@ const Contact = props => {
                     </div>
                     <button type="submit" className="classic-btn" onClick={sendEmail}>Send email</button>
                 </form>
-                <p id="msg"></p>
+                <p id="msg" className="msg"></p>
             </div>
         </div>
     )

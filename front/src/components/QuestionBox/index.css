@@ -1,0 +1,40 @@
+.take-test .question{
+    padding-top: 0;
+}
+.take-test .question .question-box:first-child{
+    text-align: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    color: #fff;
+}
+.take-test h2{
+    font-weight: lighter;
+}
+.take-test .under{
+    display: block;
+    font-size: 12px;
+}
+.take-test .question-box{
+    padding: 10px;
+}
+.take-test .question-box .answer-box{
+    margin-bottom: 20px;
+}
+.take-test .question-box.align{
+    margin-top: 0;
+    text-align: center;
+}
+.take-test .question-input{
+    display: block;
+    width: 100%;
+}
+.take-test textarea.question-input{
+    border: 1px solid #492827;
+    height: 200px;
+    resize: none;
+}
+
+.take-test .question-box:first-child{
+    background-color: #604f47;
+    border-bottom: 1px solid #492827;
+}

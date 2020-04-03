@@ -2,7 +2,7 @@
     position: relative;
     z-index: -2;
     width: 100%;
-    min-height: 700px;
+    min-height: 740px;
     background-color: #492827;
     color: #f0e3c5;
 }
@@ -10,14 +10,15 @@
     position: absolute;
     z-index: -1;
     width: 100%;
-    min-height: 700px;
+    min-height: 740px;
     background-image: url('./landing-bg.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    opacity: 0.7;
+    opacity: 0.6;
 }
 .landing .content{
+    width: 80%;
     padding-top: 200px;
     text-align: right;
 }

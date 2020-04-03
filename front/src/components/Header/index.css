@@ -1,5 +1,5 @@
 header{
-    /*padding: 8px 0;*/
+    padding: 8px 0;
     background-color: #492827;
     color: #F0E3C5;
     box-shadow: 0px 2px 20px #f0e3c5;
@@ -9,6 +9,9 @@ header .content-wrap{
     justify-content: space-between;
     align-items: center;
 }
+header .header-box{
+    position: relative;
+}
 a{
     color: #F0E3C5;;
     text-decoration: none;
@@ -16,19 +19,75 @@ a{
 a:hover{
     text-decoration: underline;
 }
-header input{
-    width: 300px;
-    padding: 8px;
+header .header-box-search{
+    width: 310px;
+    padding-right: 8px;
+    border: 1px solid #604F47;
+    border-radius: 24px;
+    cursor: auto;
+}
+header .header-box-search .flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .header-box-search input{
+    width: 80%;
+    padding: 4px 8px;
     background-color: inherit;
     color: #F0E3C5;
-    border: 1px solid #604F47;
     border-radius: 12px;
     outline: none;
 }
 header input::placeholder{
     color: #F0E3C5;
 }
-header .auth-link{ margin-left: 20px; }
+header .header-box-search #loading{
+    display: none;
+    width: 20%;
+    font-size: 12px;
+    cursor: auto;
+}
+header #search{
+    display: none;
+    position: absolute;
+    top: 35px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 200;
+    box-shadow: 2px 2px 2px #333;
+}
+header #search li{
+    display: block;
+    padding: 0;
+    background-color: #fff;
+    color: #000;
+}
+header #search .search-test{
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+}
+header #search .search-test:hover{
+    background-color: #492827;
+    color: #fff;
+}
+header #search li a{
+    display: flex;
+    padding: 6px 0;
+    color: #000;
+}
+header #search li div:first-child{ margin-right: 6px; }
+header #search li:hover a{
+    background-color: #492827;
+    color: #fff;
+    text-decoration: none;
+}
+header .auth-link{ 
+    margin-left: 20px; 
+}
 header ul{
     position: relative;
     list-style-type: none;
@@ -37,19 +96,17 @@ header ul{
 }
 header li{
     display: inline-block;
-    padding: 10px 0;
     cursor: pointer;
 }
-/*header li a:hover{
-    text-decoration: underline;
-}*/
 header li ul{
-    display: none;
     position: absolute;
-    top: 39px;
+    top: 35px;
     left: 0;
     width: 140px;
     background-color: #fff; 
+}
+header li ul.hide{
+    display: none;
 }
 header li ul li{
     display: block;
@@ -60,6 +117,7 @@ header li ul li{
     font-size: 14px;
 }
 header li ul li:first-child{
+    display: none;
     margin-top: 0;    
 }
 header li ul li:last-child{
@@ -76,6 +134,94 @@ header li ul li:hover a{
     color: #fff;
     text-decoration: none;
 }
-header li:hover ul{
-    display: block;
+header .header-box:last-child .toggle{
+    display: none;
+}
+
+@media(max-width: 860px){
+    header li ul{
+        width: 80px;
+    }
+}
+@media(max-width: 720px){
+    header ul{
+        margin-right: 20px;
+    }
+    header li ul{
+        top: 33px;
+        width: 100px;
+    }
+    header .header-box:first-child{
+        display: none;
+    }
+    header .header-box:last-child .home{
+        display: block;
+    }
+}
+@media(max-width: 580px){
+    header .nav{
+        display: none;
+    }
+    header li ul{
+        top: 33px;
+    }
+    header .header-box:last-child .toggle{
+        position: relative;
+        display: block;
+        margin-right: 20px;
+    }
+    header .header-box:last-child .toggle .hamburger{ cursor: pointer; }
+    header .header-box:last-child .toggle .hamburger div{
+        width: 20px;
+        height: 1px;
+        margin: 4px 0;
+        background-color: #fff;
+    }
+    header .header-box:last-child .toggle ul{
+        position: absolute;
+        width: 80px;
+        top: 27.5px;
+        background-color: #fff;
+    }
+    header .header-box:last-child .toggle ul.hide{
+        display: none;
+    }
+    header .header-box:last-child .toggle ul li{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #492827;
+    }
+    header .header-box:last-child .toggle ul li:last-child{ border: none; }
+    header .header-box:last-child .toggle ul li a{
+        display: block;
+        padding: 6px 0;
+        width: 100%;
+        color: #000;
+    }
+    header .header-box:last-child .toggle ul li a:hover{
+        background-color: #492827;
+        color: #fff;
+        text-decoration: none;
+    }
+}
+@media(max-width: 480px){
+    header .header-box-search{
+        width: 70%;
+    }
+}
+@media(max-width: 400px){
+    header ul{
+        margin-right: 0;
+    }
+    header li ul{
+        width: 80px;
+    }
+    header .header-box:last-child .toggle ul{ width: 76px; }
+}
+@media(max-width: 360px){
+    header .header-box:last-child .toggle ul{
+        width: 70px;
+    }
 }

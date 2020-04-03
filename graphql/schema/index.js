@@ -35,7 +35,7 @@ module.exports = buildSchema(`
         title: String!
         desc: String!
         questions: String!
-        resources: String!
+        resources: String
     }
 
     type PassedTest{
@@ -43,7 +43,7 @@ module.exports = buildSchema(`
         title: String
         desc: String
         questions: [Question]
-        resources: [String]
+        resources: String
         grade: String
         score: Int
         minutes: String
@@ -67,6 +67,7 @@ module.exports = buildSchema(`
     input UserInput{
         firstName: String!
         lastName: String!
+        email: String!
         username: String!
         password: String!
     }
@@ -88,7 +89,8 @@ module.exports = buildSchema(`
     type RootMutation{
         createUser(userInput: UserInput): User!
         createTest(testInput: TestInput): Test!
-        rateTest(from: String!, minutes: String!, seconds: String!): String!
+        removeTest(_id: ID): String!
+        rateTest(test: String!, minutes: String!, seconds: String!): String!
     }
 
     type RootQuery{
