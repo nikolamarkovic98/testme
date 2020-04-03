@@ -9,7 +9,9 @@ I developed this application using NodeJS/GraphQL API with MongoDB on the backen
 
 The core features of testMe platform are:
 1. SignIn
+
 2. SignUp
+
 3. Creating tests
 4. Passing tests
 5. Your own profile with created tests and passed tests
